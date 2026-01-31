@@ -21,12 +21,17 @@ app.get('/track/open', (req, res) => {
     console.log(log)
 
     // IMPORTANT: báo cho browser đây là GIF
-    res.set('Content-Type', 'image/gif')
-    // IMPORTANT: chống Cache (mỗi lần mở đều mới)
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
+    // res.set('Content-Type', 'image/gif')
+    // // IMPORTANT: chống Cache (mỗi lần mở đều mới)
+    // res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
+    // res.set('Content-Length', TRANSPARENT_GIF_BUFFER.length)
 
-    // Trả về cái GIF
-    res.send(TRANSPARENT_GIF_BUFFER)
+    // // Trả về cái GIF
+    // res.send(TRANSPARENT_GIF_BUFFER)
+
+    const RELIABLE_PIXEL_URL = "https://raw.githubusercontent.com/make-github-pseudonymous-again/pixels/main/1x1%23FFFFFF.jpg"
+    // 307: Temporary Redirect (Để lần sau nó vẫn hỏi lại)
+    res.redirect(307, RELIABLE_PIXEL_URL)   
 })
 
 app.get('/track/click', (req, res) => {
